@@ -1,0 +1,12 @@
+{
+  "name": "omegle",
+  "version": "1.0.0",
+  "description": "library that interacts with the omegle.com api",
+  "type": "module",
+  "main": "omegle.js",
+  "scripts": {
+    "test": "dev"
+  },
+  "author": "vitor.dev",
+  "license": "MIT"
+}
