@@ -66,10 +66,3 @@ class Omegle extends Requests {
         this.central = response.json['clientID'];
     }
 }
-
-(async () => {
-    const omegle = new Omegle();
-    await omegle.startConnection(); // Certifique-se de passar um valor válido de 'cc' se necessário
-    const response = await omegle.chat.startChat();
-    console.log(response); // Imprime a resposta
-})();
