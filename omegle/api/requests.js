@@ -1,13 +1,15 @@
 class Requests {
-    constructor(debug) {
+    constructor(debug, exceptions) {
         this.debug = debug;
+        this.exceptions = exceptions;
     }
 
-    message(status, url, method) {
-        if (status === 200) {
-            console.log(`\x1b[0;32m${method.toUpperCase()}:\x1b[0m ${url} | Status: ${status}`);
+    message(response, url, method) {
+        if (response.status === 200) {
+            console.log(`\x1b[0;32m${method.toUpperCase()}:\x1b[0m ${url} | Status: ${response.status}`);
         } else {
-            console.log(`\x1b[0;31m${method.toUpperCase()}:\x1b[0m ${url} | Status: ${status}`);
+            console.log(`\x1b[0;31m${method.toUpperCase()}:\x1b[0m ${url} | Status: ${response.status}`);
+            if ( exceptions) throw new Error(response.json)
         }
     }
 
@@ -18,7 +20,7 @@ class Requests {
                 'Content-Type': 'application/json'
             }
         });
-        if (this.debug) this.message(response.status, url, "get");
+        if (this.debug) this.message(response, url, "get");
         return response;
     }
 
@@ -30,13 +32,9 @@ class Requests {
             },
             body: JSON.stringify(data)
         });
-        if (this.debug) {
-            if (response.status === 200) {
-                console.log(`\x1b[0;32mPOST:\x1b[0m ${url} | Status: ${response.status.toString()}`);
-            } else {
-                console.log(`\x1b[0;31mPOST:\x1b[0m ${url} | Status: ${response.status.toString()}`);
-            }
-        }
+        if (this.debug) this.message(response, url, "post");
         return response;
     }
 }
+
+export default Requests;
