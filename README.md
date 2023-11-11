@@ -1,3 +1,2 @@
 # omegle
-library that interacts with the omegle.com api.
- 
+library that interacts with the omegle.com api. (F Omegle)
